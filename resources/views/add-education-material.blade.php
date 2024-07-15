@@ -5,7 +5,6 @@
         </h2>
     </x-slot>
 
-    @if (!Auth::user()->field)
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -14,7 +13,7 @@
 
                     <header>
                         <h2 class="text-lg font-medium text-gray-900">
-                            {{ __('Profile Information') }}
+                            {{ __('Add Material') }}
                         </h2>
 
                         <p class="mt-1 text-sm text-gray-600">
@@ -25,7 +24,7 @@
                     <form method="post" action="{{ route('save-academic-profile') }}" class="mt-6 space-y-6">
                         @csrf
                         <div>
-                            <x-input-label for="name" :value="__('Full Name')" />
+                            <x-input-label for="name" :value="__('Title')" />
                             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', Auth::user()->name)" required autofocus autocomplete="name" />
                             <x-input-error class="mt-2" :messages="$errors->get('name')" />
                         </div>
@@ -49,7 +48,7 @@
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <x-primary-button>{{ __('Save') }}</x-primary-button>
+                            <x-primary-button>{{ __('Add') }}</x-primary-button>
 
                             @if (session('status') === 'profile-updated')
                             <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-gray-600">{{ __('Saved.') }}</p>
@@ -60,21 +59,6 @@
             </div>
         </div>
     </div>
-
-    @else
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    @endif
 
 
 </x-app-layout>

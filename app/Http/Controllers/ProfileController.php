@@ -9,11 +9,31 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use App\Models\User;
+
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
+
+    public function update_academic_profile(Request $request)
+    {
+        User::find($request->user()->id)->update([
+            'name' => $request->name,
+            'field' => $request->field,
+            'year' => $request->year,
+            'school' => $request->school,
+        ]);
+        return redirect()->back();
+    }
+
+    public function add_edu_material(Request $request)
+    {
+        return view('add-education-material');
+    }
+
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [
